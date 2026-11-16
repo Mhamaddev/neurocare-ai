@@ -1,0 +1,20 @@
+{
+  "model_sha256": "cd353680c50d687202582aa02d37212fc2c5695c4fa58953a3f3238b0f445424",
+  "weights_sha256": "b96400ca9be8ee5f9eeedecca350b5f7317c3695623cd582313f4f4bf78fa0a4",
+  "layers": 3,
+  "hidden_units": [
+    64,
+    32
+  ],
+  "dropout_rates": [
+    0.1,
+    0.1
+  ],
+  "activations": [
+    "relu",
+    "relu",
+    "sigmoid"
+  ],
+  "max_abs_difference_from_keras": 1.1920928955078125e-07,
+  "checked_rows": 2048
+}

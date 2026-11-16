@@ -1,0 +1,9 @@
+# Render blueprint: one free web service built from the Dockerfile.
+services:
+  - type: web
+    name: neurocare-ai
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    autoDeploy: true

@@ -1,0 +1,11 @@
+# Runtime-only dependencies for the hosted demo: no TensorFlow, pandas or scikit-learn.
+# Inference uses the exported weights in NumPy (app/ml/numpy_network.py). Versions match requirements.txt.
+fastapi==0.115.12
+uvicorn==0.34.2
+SQLAlchemy==2.0.40
+psycopg[binary]==3.2.9
+alembic==1.15.2
+pydantic==2.11.4
+pydantic-settings==2.9.1
+python-dotenv==1.1.0
+numpy==2.1.3

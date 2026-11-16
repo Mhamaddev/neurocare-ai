@@ -1,0 +1,39 @@
+# Local run for machines without Python 3.11 / Node installed: everything in containers.
+# Start:  docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
+# Stop:   docker compose -f docker-compose.yml -f docker-compose.local.yml down
+services:
+  backend:
+    image: python:3.11-slim
+    working_dir: /app/backend
+    env_file: .env
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+    volumes:
+      - .:/app
+      - backend_venv:/venv
+    command: >
+      sh -c "test -x /venv/bin/uvicorn || (python -m venv /venv &&
+      /venv/bin/pip install --no-cache-dir -r requirements.txt) &&
+      /venv/bin/python -m alembic upgrade head &&
+      exec /venv/bin/python -m uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    image: node:22-slim
+    working_dir: /app/frontend
+    volumes:
+      - ./frontend:/app/frontend
+      - frontend_modules:/app/frontend/node_modules
+    command: sh -c "npm ci && exec npx vite --host 0.0.0.0"
+    ports:
+      - "127.0.0.1:5173:5173"
+
+volumes:
+  backend_venv:
+  frontend_modules:

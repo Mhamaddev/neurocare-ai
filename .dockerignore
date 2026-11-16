@@ -1,0 +1,14 @@
+# Keep secrets, local data and build leftovers out of the image.
+.env
+.env.*
+.git
+**/node_modules
+**/dist
+**/.venv
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache
+data
+docs
+.postgres-data
+*.log
